@@ -49,7 +49,10 @@ module.exports = {
 			3、false： 所有静态资源css和JavaScript都不会注入到模板文件中*/
     }),
     new VueLoaderPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename:"[name].css"
+    })
   ],
   watch:true,
   watchOptions:{
