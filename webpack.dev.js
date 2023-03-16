@@ -50,9 +50,6 @@ module.exports = {
     }),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new MiniCssExtractPlugin({
-      filename:"[name].css"
-    })
   ],
   watch:true,
   watchOptions:{
