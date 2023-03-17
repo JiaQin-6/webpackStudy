@@ -23,5 +23,6 @@ export default {
 <style lang="less" scoped>
 .hello {
   color: red;
+  display: flex;
 }
 </style>

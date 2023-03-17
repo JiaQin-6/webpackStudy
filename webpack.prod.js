@@ -1,7 +1,7 @@
 "use strict";
 const path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var MiniCssExtractPlugin = require("mini-css-extract-plugin");//npm i mini-css-extract-plugin -D 打包css成.css文件
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");//npm i mini-css-extract-plugin -D 打包css成.css文件（注意该插件和vue-style-loader有冲突）
 const { VueLoaderPlugin } = require("vue-loader");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");//css压缩
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");//自动清除构建目录
@@ -20,11 +20,39 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],//MiniCssExtractPlugin loader 和style-loader會有衝突，所以去掉style-loader
+                use: [MiniCssExtractPlugin.loader, "css-loader", {
+                    loader: 'postcss-loader',
+                    options: {
+                      postcssOptions: {
+                        plugins: [
+                          [
+                            'postcss-preset-env',
+                            {
+                              // 其他选项
+                            },
+                          ],
+                        ],
+                      },
+                    },
+                  }],//MiniCssExtractPlugin loader 和style-loader會有衝突，所以去掉style-loader
             },
             {
                 test: /\.less$/i,
-                use: [ "vue-style-loader",MiniCssExtractPlugin.loader, "css-loader", "less-loader"],//MiniCssExtractPlugin loader 和style-loader會有衝突，所以去掉style-loader
+                use: [ "vue-style-loader",MiniCssExtractPlugin.loader, "css-loader", "less-loader",{
+                    loader: 'postcss-loader',
+                    options: {
+                      postcssOptions: {
+                        plugins: [
+                          [
+                            'postcss-preset-env',
+                            {
+                              // 其他选项
+                            },
+                          ],
+                        ],
+                      },
+                    },
+                  }],//MiniCssExtractPlugin loader 和style-loader會有衝突，所以去掉style-loader
             },
             { test: /\.vue$/, use: ["vue-loader"] },
             {
