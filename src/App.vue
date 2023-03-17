@@ -24,5 +24,6 @@ export default {
 .hello {
   color: red;
   display: flex;
+  font-size: 32px;
 }
 </style>

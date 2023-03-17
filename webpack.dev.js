@@ -2,7 +2,7 @@
 const path = require("path");
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var MiniCssExtractPlugin = require("mini-css-extract-plugin");//npm i mini-css-extract-plugin -D 打包css成.css文件
+var MiniCssExtractPlugin = require("mini-css-extract-plugin"); //npm i mini-css-extract-plugin -D 打包css成.css文件
 const { VueLoaderPlugin } = require("vue-loader");
 module.exports = {
   entry: "./src/index.js",
@@ -19,11 +19,33 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [
+          'style-loader',
+          "css-loader",
+          {
+            loader: "px2rem-loader",//npm i px2rem-loader -D (结合lib-flexible使用， npm i lib-flexible -S)
+            options: {
+              remUnit: 75,//1rem = 75px
+              remPrecision: 8,//小数点位数
+            },
+          },
+        ],
       },
       {
         test: /\.less$/i,
-        use: ["style-loader", "vue-style-loader", "css-loader", "less-loader"],
+        use: [
+          'style-loader',
+          "vue-style-loader",
+          "css-loader",
+          "less-loader",
+          {
+            loader: "px2rem-loader",
+            options: {
+              remUnit: 75,
+              remPrecision: 8,
+            },
+          },
+        ],
       },
       { test: /\.vue$/, use: ["vue-loader"] },
       {
@@ -52,18 +74,20 @@ module.exports = {
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
-  watch:true,
-  watchOptions:{
-    ignored:/node_modules/,//忽略文件
-    aggregateTimeout:300,//300ms后执行
-    poll:1000,//每秒询问1000次系统文件是否有变化
+  watch: true,
+  watchOptions: {
+    ignored: /node_modules/, //忽略文件
+    aggregateTimeout: 300, //300ms后执行
+    poll: 1000, //每秒询问1000次系统文件是否有变化
   },
   devServer: {
-    static: { // static: ['assets']
-		directory: path.join(__dirname, 'dist')
-	},
+    static: {
+      // static: ['assets']
+      directory: path.join(__dirname, "dist"),
+    },
     port: 5000,
-    hot:true,
+    hot: true,
     open: true,
   },
+  devtool:'source-map'
 };
