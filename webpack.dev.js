@@ -2,6 +2,7 @@
 const path = require("path");
 var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
+var MiniCssExtractPlugin = require("mini-css-extract-plugin");//npm i mini-css-extract-plugin -D 打包css成.css文件
 const { VueLoaderPlugin } = require("vue-loader");
 module.exports = {
   entry: "./src/index.js",
