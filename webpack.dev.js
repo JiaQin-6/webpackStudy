@@ -4,6 +4,7 @@ var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin"); //npm i mini-css-extract-plugin -D 打包css成.css文件
 const { VueLoaderPlugin } = require("vue-loader");
+const ESLintPlugin = require('eslint-webpack-plugin');//cnpm i eslint babel-loader eslint-plugin-vue eslint-webpack-plugin eslint-config-airbnb-base eslint-plugin-import eslint-config-airbnb -D
 module.exports = {
   entry: "./src/index.js",
   output: {
@@ -73,6 +74,9 @@ module.exports = {
     }),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
+    new ESLintPlugin({
+      fix: true, //自动修复
+    })
   ],
   watch: true,
   watchOptions: {
