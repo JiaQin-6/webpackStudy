@@ -56,7 +56,8 @@
   "homepage": "https://github.com/JiaQin-6/webpackStudy#readme",
   "dependencies": {
     "lib-flexible": "^0.3.2",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "webpack-component-david": "^1.0.0"
   },
   "browserslist": {
     "development": [
