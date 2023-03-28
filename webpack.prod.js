@@ -2,7 +2,7 @@
 const path = require("path");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin"); //npm i mini-css-extract-plugin -D 打包css成.css文件（注意该插件和vue-style-loader有冲突）
-const { VueLoaderPlugin } = require("vue-loader");
+const { VueLoaderPlugin } = require("vue-loader");//解析vue文件
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //css压缩
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //自动清除构建目录
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');//npm i html-webpack-externals-plugin,使用CDN加载
@@ -152,7 +152,7 @@ module.exports = {
       filename: "[name]_[contenthash:8].css",
     }),
     new CleanWebpackPlugin(),
-    new HtmlWebpackExternalsPlugin({
+    new HtmlWebpackExternalsPlugin({//CDN
       externals: [
         {
           module: 'vue',
