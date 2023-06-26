@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="hello">{{title}}</p>
-    <img src="./assets/image/test.png" alt="">
+    <img style="width:200px" src="./assets/image/test.png" alt="">
     <CIndex></CIndex>
   </div>
 </template>
@@ -16,7 +16,7 @@ export default {
   },
     setup(props) {
         const data = reactive({
-          title:'你好'
+          title:'这是主页面'
         });
         return {
             ...toRefs(data)

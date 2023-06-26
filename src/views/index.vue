@@ -1,5 +1,5 @@
 <template>
-  <div>dada</div>
+  <div>这是一个子页面</div>
 </template>
 
 <script>
