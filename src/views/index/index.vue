@@ -6,16 +6,32 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs } from "vue";
+import { ref, reactive,getCurrentInstance, toRefs } from "vue";
+import { useStore } from "vuex";
 import "../../assets/css/common.css";
 export default {
   setup(props) {
     const data = reactive({
       title: "这是主页面",
     });
-    console.log(0);
+    const { proxy, ctx } = getCurrentInstance();
+    const store = useStore();
+    store.commit("setLoginStatus", false);
+    const login = async () => {
+      try {
+        const res = await proxy.$http.login({
+          loginName: 'david',
+          password: 'david',
+        });
+        console.log(res)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    login();
     return {
       ...toRefs(data),
+      login,
     };
   },
 };

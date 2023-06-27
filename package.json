@@ -59,9 +59,12 @@
   },
   "homepage": "https://github.com/JiaQin-6/webpackStudy#readme",
   "dependencies": {
+    "axios": "^1.4.0",
     "lib-flexible": "^0.3.2",
     "vue": "^3.2.47",
     "vue-router": "^4.2.2",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0",
     "webpack-component-david": "^1.0.0"
   },
   "browserslist": {
