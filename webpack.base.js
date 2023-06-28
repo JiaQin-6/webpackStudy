@@ -73,6 +73,9 @@ module.exports = {
       },
     ],
   },
+  devServer:{
+    historyApiFallback:true,//解决如果是使用history的这个路由方式，刷新页面会报错问题
+  },
   plugins: [
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
@@ -85,10 +88,10 @@ module.exports = {
           process.argv.indexOf("--watch") === -1
         ) {
           console.log("build error");
-          process.exit(1);
+          // process.exit(1);//用于结束node.js运行的进程。
         }
       });
     },
   ].concat(HtmlWebpackPlugins),
-  stats: "errors-only",
+  // stats: "errors-only",
 };

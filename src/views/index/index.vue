@@ -2,13 +2,14 @@
   <div>
     <p class="hello">{{ title }}</p>
     <img style="width: 200px" src="../../assets/image/test.png" alt="" />
+    <button @click="toHome">to home</button>
   </div>
 </template>
 
 <script>
 import { ref, reactive,getCurrentInstance, toRefs } from "vue";
 import { useStore } from "vuex";
-import "../../assets/css/common.css";
+import { useRouter, useRoute } from "vue-router";
 export default {
   setup(props) {
     const data = reactive({
@@ -16,6 +17,8 @@ export default {
     });
     const { proxy, ctx } = getCurrentInstance();
     const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
     store.commit("setLoginStatus", false);
     const login = async () => {
       try {
@@ -28,10 +31,15 @@ export default {
         console.log(error);
       }
     };
-    login();
+    const toHome = ()=>{
+      router.push({
+        path:'/home'
+      })
+    };
     return {
       ...toRefs(data),
       login,
+      toHome
     };
   },
 };

@@ -4,9 +4,10 @@ const app = createApp(App);
 import router from '../../router/index';
 import store from '../../store/index';
 import http from '../../axios/index';
+import i18n from "../../i18n/index.js";
 app.config.globalProperties.$http = http;
-import add from 'webpack-component-david';
+// import add from 'webpack-component-david';
+// console.log(add);
 import 'lib-flexible';
-
-console.log(add);
-app.use(router).use(store).mount('#app');
+import "../../assets/css/common.css";
+app.use(router).use(store).use(i18n).mount('#app');

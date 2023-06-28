@@ -8,6 +8,7 @@ const devConfig = {
     output: {
         filename: "[name].js",
         path: path.join(__dirname, "dist"),
+        publicPath:'/',
       },
     mode: "development",
     module: {
@@ -67,5 +68,6 @@ const devConfig = {
         open: true,
     },
     devtool: 'source-map',
+    stats: "errors-only",//仅显示错误信息
 }
 module.exports = merge(baseConfig, devConfig)
