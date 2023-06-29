@@ -3,6 +3,7 @@ const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin"); //自动清除构建目录
 const friendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin"); //打印构建日志信息
+const WebpackBar = require('webpackbar');//进度条
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 //多頁面打包
 const glob = require("glob");
@@ -41,7 +42,6 @@ const setMPA = () => {
 const { entry, HtmlWebpackPlugins } = setMPA();
 module.exports = {
   entry: entry,
-
   module: {
     rules: [
       {
@@ -80,6 +80,11 @@ module.exports = {
     new VueLoaderPlugin(),
     new CleanWebpackPlugin(),
     new friendlyErrorsWebpackPlugin(),
+    new WebpackBar({
+      // color: "#85d", // 默认green，进度条颜色支持HEX
+      basic: false, // 默认true，启用一个简单的日志报告器
+      profile: false, // 默认false，启用探查器。
+    }),
     function () {
       this.hooks.done.tap("done", (stats) => {
         if (

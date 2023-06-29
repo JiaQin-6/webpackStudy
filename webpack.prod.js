@@ -6,13 +6,19 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin"); //npm i mini-css-
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //css压缩
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');//npm i html-webpack-externals-plugin,使用CDN加载
 const CopyWebpackPlugin = require('copy-webpack-plugin');//将public文件夹下的文件复制到打包后的dist目录中。
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;//打包体积分析
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+const prodPluginConfig = smp.wrap({
+
+})
 const prodConfig = {
     output: {
         filename: "[name]_[chunkhash:8].js",
         path: path.join(__dirname, "dist"),
         publicPath:'/',
     },
-    mode: "production",//默认开启tree shaking和scope hoisting
+    mode: "production",//默认开启tree shaking(树摇)和scope hoisting(作用域提升)
     module: {
         rules: [
             {
@@ -118,7 +124,7 @@ const prodConfig = {
                 to: ''
               }
             ]
-          })
+          }),
         // new HtmlWebpackExternalsPlugin({//CDN
         //     externals: [
         //         {
@@ -128,6 +134,8 @@ const prodConfig = {
         //         },
         //     ],
         // }),
+        // 打包体积分析
+         new BundleAnalyzerPlugin(),
     ]
 }
-module.exports = merge(baseConfig, prodConfig)
+module.exports = merge(baseConfig, prodConfig,prodPluginConfig)

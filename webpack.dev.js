@@ -58,6 +58,10 @@ const devConfig = {
         aggregateTimeout: 300, //300ms后执行
         poll: 1000, //每秒询问1000次系统文件是否有变化
     },
+    // dev缓存
+    cache: {
+        type: 'memory'
+    },
     devServer: {
         static: {
             // static: ['assets']
@@ -65,6 +69,7 @@ const devConfig = {
         },
         port: 5000,
         hot: true,
+        compress: true, // 是否启用 gzip 压缩
         open: true,
     },
     devtool: 'source-map',
