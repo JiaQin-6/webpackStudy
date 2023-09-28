@@ -4,7 +4,7 @@ import axios from "axios";
 let baseUrl = "";
 switch (process.env.NODE_ENV) {
     case "development": // 注意这里的名字要和步骤二中设置的环境名字对应起来
-        baseUrl = "http://43.154.184.138:8084"; //这里是测试环境中的url
+        baseUrl = "http://localhost:3000/"; //这里是测试环境中的url http://43.154.184.138:8084
         break;
     case "production":
         baseUrl = "https://app.fairviewpark.hk"; //生产环境url
@@ -16,16 +16,16 @@ export const http = axios.create({
     baseURL: baseUrl,
     withCredentials: true,
     timeout: 1800000, //数据响应过期时间
-    // headers: {
-    //   // 设置后端需要的传参类型
-    //   "Content-Type": "application/json",
+    headers: {
+      // 设置后端需要的传参类型
+      "Content-Type": "application/x-www-form-urlencoded",
     //   token: "your token",
     //   "X-Requested-With": "XMLHttpRequest",
-    // },
+    },
 });
 //登录
 http.login = (arr) => {
-    return http.post(`/houseweb/member/login`, arr);
+    return http.post(`/login`, arr);
 };
 /* ---------------------------------------------------------------------- */
 /* 请求拦截:在浏览器发送请求报文给服务器的途中执行 */

@@ -3,6 +3,7 @@
     <p class="hello">{{ title }}</p>
     <img style="width: 200px" src="../../assets/image/test.png" alt="" />
     <button @click="toHome">to home</button>
+    <button @click="login">login</button>
   </div>
 </template>
 
@@ -23,8 +24,8 @@ export default {
     const login = async () => {
       try {
         const res = await proxy.$http.login({
-          loginName: 'david',
-          password: 'david',
+          username: 'ABRS001',
+          password: 'e10adc3949ba59abbe56e057f20f883e',
         });
         console.log(res)
       } catch (error) {
@@ -39,7 +40,7 @@ export default {
     return {
       ...toRefs(data),
       login,
-      toHome
+      toHome,
     };
   },
 };
