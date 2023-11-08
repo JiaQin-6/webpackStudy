@@ -1,8 +1,6 @@
 <template>
-  <div>
-    <p class="hello">{{ title }}</p>
-    <img style="width: 200px" src="../../assets/image/test.png" alt="" />
-    <button @click="toHome">to home</button>
+  <div style="text-align:center;margin-top:30px">
+    <span class="title">{{ title }}</span>
     <button @click="login">login</button>
   </div>
 </template>
@@ -14,7 +12,7 @@ import { useRouter, useRoute } from "vue-router";
 export default {
   setup(props) {
     const data = reactive({
-      title: "这是主页面",
+      title: "點擊登錄:",
     });
     const { proxy, ctx } = getCurrentInstance();
     const store = useStore();
@@ -32,23 +30,22 @@ export default {
         console.log(error);
       }
     };
-    const toHome = ()=>{
-      router.push({
-        path:'/home'
-      })
-    };
     return {
       ...toRefs(data),
       login,
-      toHome,
     };
   },
 };
 </script>
 <style lang="less" scoped>
-.hello {
-  color: red;
-  display: flex;
-  font-size: 32px;
+.title {
+  color: rgb(20, 136, 252);
+  font-size: 20px;
+  margin-right:20px;
+}
+.title2 {
+  color: rgb(20, 136, 252);
+  font-size: 20px;
+  margin-right:20px;
 }
 </style>

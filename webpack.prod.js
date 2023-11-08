@@ -7,7 +7,12 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin"); //css压缩
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');//npm i html-webpack-externals-plugin,使用CDN加载
 const CopyWebpackPlugin = require('copy-webpack-plugin');//将public文件夹下的文件复制到打包后的dist目录中。
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;//打包体积分析
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");//打包速度分析工具
+// const {PurgeCSSPlugin} = require('purgecss-webpack-plugin');//樹搖﹣css（但是会导致vue文件打包后样式丢失）
+// const glob = require('glob');
+// const PATHS = {
+//     src:path.join(__dirname,'src')
+// }
 const smp = new SpeedMeasurePlugin();
 const prodPluginConfig = smp.wrap({
 
@@ -135,7 +140,11 @@ const prodConfig = {
         //     ],
         // }),
         // 打包体积分析
-         new BundleAnalyzerPlugin(),
+        //  new BundleAnalyzerPlugin(),
+        // 針對css做Tree Shaking處理(但是会导致vue文件里面的样式丢失)
+        // new PurgeCSSPlugin({
+        //     paths:glob.sync(`${PATHS.src}/**/*`,{ nodir: true }),
+        // }),
     ]
 }
 module.exports = merge(baseConfig, prodConfig,prodPluginConfig)
